@@ -73,6 +73,7 @@ namespace MotoduinoWiFi {
     //% block="MQTT Publish| mqtt_public %mqtt_public| data %data"
     export function MQTT_pub(mqtt_public: string, data: string): void {
         sendAT("AT+MQTTPUB=0,\"" + mqtt_public + "\",\"" + data + "\",0,0");
+		bAP_Connected = waitResponse()
     }
     /**
     * Check if ESP8266 successfully connected to Wifi
