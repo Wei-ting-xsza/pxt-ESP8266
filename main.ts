@@ -55,17 +55,23 @@ namespace MotoduinoWiFi {
         serial.redirect(txd, rxd, BaudRate.BaudRate9600)
         sendAT("AT+RST")
         sendAT("ATE0")
-    	sendAT("AT+CWMODE_CUR=1")
+    	sendAT("AT+CWMODE=1")
         sendAT("AT+CIPDINFO=1")
         sendAT("AT+CWAUTOCONN=0")
         sendAT("AT+CWDHCP=1,1")
         sendAT("AT+GMR")
 		sendAT("AT+CIPSTATUS")
-    	sendAT("AT+CWJAP_CUR=\"" + ssid + "\",\"" + passwd + "\"", 0)
+    	sendAT("AT+CWJAP=\"" + ssid + "\",\"" + passwd + "\"", 0)
 		bAP_Connected = waitResponse()
     }
-
-
+	export function MQTT_Setup(server: string, client: string, username: string, passwd: string): void {
+        sendAT("AT+MQTTUSERCFG=0,1,\""+client+"\",\""+username+"\",\""+passwd+"\",0,0,\"\"")
+        sendAT("AT+MQTTCONN=0,\""+server+"\",1883,0")
+    }
+    export function MQTT_pub(mqtt_public: string, data: string): void {
+        sendAT("AT+MQTTUSERCFG=0,1,\""+client+"\",\""+username+"\",\""+passwd+"\",0,0,\"\"")
+        sendAT("AT+MQTTPUB=0,\""+mqtt_public+"\",\""+data+"\"1883,0")
+    }
     /**
     * Check if ESP8266 successfully connected to Wifi
     */
