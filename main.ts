@@ -68,6 +68,7 @@ namespace MotoduinoWiFi {
     export function MQTT_Setup(server: string, client: string, username: string, passwd: string): void {
         sendAT("AT+MQTTUSERCFG=0,1,\"" + client + "\",\"" + username + "\",\"" + passwd + "\",0,0,\"\"")
 		sendAT("AT+MQTTCONN=0,\""+server+"\",1883,0")
+		bAP_Connected = waitResponse()
     }
     //% block="MQTT Publish| mqtt_public %mqtt_public| data %data"
     export function MQTT_pub(mqtt_public: string, data: string): void {
