@@ -64,13 +64,13 @@ namespace MotoduinoWiFi {
     	sendAT("AT+CWJAP=\"" + ssid + "\",\"" + passwd + "\"", 0)
 		bAP_Connected = waitResponse()
     }
-	/**
-    * 計算長方形面積，不回傳，只顯示在LED
-    */
-    //% blockId="ledOfRectangle" block="show area of rectangle length %length|width %width"
-    //% blockGap=2 weight=1
-    export function ledOfRectangle(length: number, width:number): void {
-        basic.showNumber(length*width)
+	//% block="MQTT Setup| server %server| client_ID %client| Username %username| PASSWORD %passwd"
+    export function MQTT_Setup(server: string, client: string, username: string, passwd: string): void {
+        sendAT("AT+MQTTUSERCFG=0,1,\"" + client + "\",\"" + username + "\",\"" + passwd + "\",0,0,\"\"")
+    }
+    //% block="MQTT Publish| mqtt_public %mqtt_public| data %data"
+    export function MQTT_pub(mqtt_public: string, data: string): void {
+        sendAT("AT+MQTTPUB=0,\"" + mqtt_public + "\",\"" + data + "\",0,0");
     }
     /**
     * Check if ESP8266 successfully connected to Wifi
