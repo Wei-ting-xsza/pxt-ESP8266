@@ -64,10 +64,16 @@ namespace MotoduinoWiFi {
     	sendAT("AT+CWJAP=\"" + ssid + "\",\"" + passwd + "\"", 0)
 		bAP_Connected = waitResponse()
     }
+	//% blockId=MQTT_Setup
+    //% weight=100
+    //% block="MQTT Setup| server %server| client_ID %client| Username %username| PASSWORD %passwd"
 	export function MQTT_Setup(server: string, client: string, username: string, passwd: string): void {
         sendAT("AT+MQTTUSERCFG=0,1,\""+client+"\",\""+username+"\",\""+passwd+"\",0,0,\"\"")
         sendAT("AT+MQTTCONN=0,\""+server+"\",1883,0")
     }
+	//% blockId=MQTT_pub
+    //% weight=100
+    //% block="MQTT Publish| mqtt_public %mqtt_public| data %data"
     export function MQTT_pub(mqtt_public: string, data: string): void {
         sendAT("AT+MQTTUSERCFG=0,1,\""+client+"\",\""+username+"\",\""+passwd+"\",0,0,\"\"")
         sendAT("AT+MQTTPUB=0,\""+mqtt_public+"\",\""+data+"\"1883,0")
