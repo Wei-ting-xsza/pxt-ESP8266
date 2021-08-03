@@ -65,12 +65,12 @@ namespace MotoduinoWiFi {
         sendAT("AT+MQTTCONN=0,\"" + server + "\",1883,0")
         waitResponse(5000)
     }
-	//% blockId=MQTT_Publish
-    //% block="MQTT_Publish| topic %mqtt_topic| data %data"
+	//% blockId=MQTT_pub
+    //% block="MQTT Publish| topic %mqtt_topic| data %data"
     export function MQTT_pub(mqtt_topic: string, data: string): void {
         sendAT("AT+MQTTPUB=0,\"" + mqtt_topic + "\",\"" + data + "\",0,0");
     }
-	//% blockId=MQTT_Suscribe
+	//% blockId=MQTT_sub
     //% block="MQTT Suscribe| topic %mqtt_topic"
     export function MQTT_sub(mqtt_topic: string): void {
         bMQTT_SUB=true
@@ -81,7 +81,7 @@ namespace MotoduinoWiFi {
 	//% blockId=MQTT_Suscribe_Received
     //% block="MQTT Suscribe $topic $message"
     //% draggableParameters
-    export function onReceivedValue(cb: (topic: string, message: string) => void) {
+    export function MQTT_Suscribe_Received(cb: (topic: string, message: string) => void) {
         onReceivedValueHandler = cb;
     }
     /**
