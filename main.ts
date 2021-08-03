@@ -22,6 +22,12 @@ namespace MotoduinoWiFi {
         let time: number = input.runningTime()
         while (true) {
             serial_str += serial.readString()
+			if (serial_str.includes("OK" + "\u000D\u000A")) {
+                result = true
+                break
+            } else if (serial_str.includes("ERROR" + "\u000D\u000A") || serial_str.includes("SEND FAIL"+ "\u000D\u000A")) {
+                break
+            }
             if (input.runningTime() - time > timeout) {
                 break
             }
@@ -169,8 +175,6 @@ namespace MotoduinoWiFi {
         GoogleCommand += "&submit=Submit HTTP/1.1\r\nHost: docs.google.com\r\nConnection: close\r\n\r\n\r\n\r\n"
         */
         let ATCommand = "AT+CIPSEND=" + (GoogleCommand.length + 2)
-
-        sendAT("AT+CIPSSLSIZE=4096")
         sendAT("AT+CIPSTART=\"SSL\",\"docs.google.com\",443")
         waitResponse(5000)
         sendAT(ATCommand)
@@ -192,7 +196,6 @@ namespace MotoduinoWiFi {
         let SendLINECommand = "POST /api/notify HTTP/1.1\u000D\u000AHost: notify-api.line.me\u000D\u000AAuthorization: Bearer " + szToken + "\u000D\u000AContent-Type: application/x-www-form-urlencoded\u000D\u000AContent-Length: " + nMsgDataLen + "\u000D\u000A\u000D\u000A" + szMsgData + "\u000D\u000A\u000D\u000A\u000D\u000A\u000D\u000A"
         let ATCommand = "AT+CIPSEND=" + (SendLINECommand.length + 2)
 
-        sendAT("AT+CIPSSLSIZE=4096")
         sendAT("AT+CIPSTART=\"SSL\",\"notify-api.line.me\",443")
         waitResponse(5000)
         sendAT(ATCommand)
@@ -246,7 +249,6 @@ namespace MotoduinoWiFi {
         FirebaseUploadCommand = szUploadMethod + " /" + szFirebasePath + ".json?auth=" + szFirebaseKey + " HTTP/1.1\u000D\u000AHost: " + szFirebaseURL + "\u000D\u000AContent-Length: " + nFirebaseDataLen + "\u000D\u000A\u000D\u000A" + szFirebaseData + "\u000D\u000A\u000D\u000A\u000D\u000A\u000D\u000A"
         let ATCommand = "AT+CIPSEND=" + (FirebaseUploadCommand.length + 2)
 
-        sendAT("AT+CIPSSLSIZE=4096")
         sendAT("AT+CIPSTART=\"SSL\",\"" + szFirebaseURL + "\",443")
         waitResponse(5000)
         sendAT(ATCommand)
@@ -267,8 +269,7 @@ namespace MotoduinoWiFi {
         let nCSVDataLen: number = szCSVData.length + 2
         let MCSUploadCommand = "POST /mcs/v2/devices/" + szDeviceID + "/datapoints.csv HTTP/1.1\u000D\u000AHost: api.mediatek.com\u000D\u000AContent-Type: text/csv\u000D\u000AdeviceKey: " + szDeviceKey + "\u000D\u000AContent-Length: " + nCSVDataLen + "\u000D\u000A\u000D\u000A" + szCSVData + "\u000D\u000AConnection: close\u000D\u000A\u000D\u000A\u000D\u000A\u000D\u000A"
         let ATCommand = "AT+CIPSEND=" + (MCSUploadCommand.length + 2)
-
-        sendAT("AT+CIPSSLSIZE=4096")
+		
         sendAT("AT+CIPSTART=\"SSL\",\"api.mediatek.com\",443")
         waitResponse(5000)
         sendAT(ATCommand)
