@@ -66,7 +66,7 @@ namespace MotoduinoWiFi {
         waitResponse(5000)
     }
 	//% blockId=MQTT_Publish
-    //% block="MQTT Publish| MQTT topic %mqtt_topic| data %data"
+    //% block="MQTT_Publish| topic %mqtt_topic| data %data"
     export function MQTT_pub(mqtt_topic: string, data: string): void {
         sendAT("AT+MQTTPUB=0,\"" + mqtt_topic + "\",\"" + data + "\",0,0");
     }
