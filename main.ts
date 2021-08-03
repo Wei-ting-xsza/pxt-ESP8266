@@ -71,7 +71,7 @@ namespace MotoduinoWiFi {
         sendAT("AT+MQTTPUB=0,\"" + mqtt_topic + "\",\"" + data + "\",0,0");
     }
 	//% blockId=MQTT_Suscribe
-    //% block="MQTT Suscribe| MQTT public %mqtt_topic
+    //% block="MQTT Suscribe| MQTT public %mqtt_topic"
     export function MQTT_sub(mqtt_topic: string): void {
         bMQTT_SUB=true
         sendAT("AT+MQTTSUB=0,\"" + mqtt_topic + "\",1");
