@@ -74,6 +74,7 @@ namespace MotoduinoWiFi {
 
 
     //% blockId=MQTT_Setup
+	//% weight=79
     //% block="MQTT Setup| server %server| clientID %client| Username %username| Password %passwd"
 
     export function MQTT_Setup(server: string, client: string, username: string, passwd: string): void {
@@ -84,6 +85,7 @@ namespace MotoduinoWiFi {
 
 
     //% blockId=MQTT_pub
+	//% weight=78
     //% block="MQTT Publish| topic %mqtt_topic| data %data"
 
     export function MQTT_pub(mqtt_topic: string, data: string): void {
@@ -92,6 +94,7 @@ namespace MotoduinoWiFi {
 
 
     //% blockId=MQTT_sub
+	//% weight=77
     //% block="MQTT Suscribe| topic %mqtt_topic"
 
     export function MQTT_sub(mqtt_topic: string): void {
@@ -102,6 +105,7 @@ namespace MotoduinoWiFi {
 
 
     //% blockId=MQTT_Suscribe_Received
+	//% weight=76
     //% block="MQTT Suscribe $topic $message"
     //% draggableParameters
 
