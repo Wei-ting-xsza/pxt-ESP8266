@@ -1,5 +1,5 @@
 /**
- * Custom blocks
+ * ESP8266 blocks
  */
 //% color=#00bc11 icon="\uf1eb" weight=90 block="MotoduinoIoT"
 
