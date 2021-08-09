@@ -42,8 +42,6 @@ namespace MotoduinoWiFi {
                 break
             }
         }
-
-        OLED.writeStringNewLine(serial_str)
         return result
     }
 
